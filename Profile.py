@@ -7,6 +7,8 @@ import werkzeug
 
 app = Flask(__name__)
 
+
+# mock data
 data = {
     "name": "Nicholas Ayson",
     "Email": "nick.ayson7@gmail.com"
