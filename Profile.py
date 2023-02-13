@@ -3,6 +3,7 @@
 
 import json
 from flask import Flask, request, jsonify
+import werkzeug
 
 app = Flask(__name__)
 
@@ -73,4 +74,11 @@ def delte_profile():
         f.write(json.dumps(new_profiles, indent=2))
     return jsonify(profile)
 
+@app.errorhandler(werkzeug.exceptions.BadRequest)
+def handle_bad_request(e):
+    return 'bad request!', 40
+    
+def page_not_found(e):
+  return render_template('404.html'), 404
+  
 app.run(debug=True)
