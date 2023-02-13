@@ -23,7 +23,7 @@ def query_profile():
         data = f.read()
         profiles = json.loads(data)
         for profile in profiles:
-            if profile[1] == name:
+            if profile[0] == name:
                 return jsonify(profile)
         return jsonify({'error': 'data not found'})
 
@@ -53,6 +53,9 @@ def update_profile():
     for r in profiles:
         if r['name'] == profile['name']:
             r['email'] = profile['email']
+            r['username'] = profile['username']
+            r['password'] = profile['password']
+            r['description'] = profile['description']
         new_profiles.append(r)
     with open('data.txt', 'w') as f:
         f.write(json.dumps(new_profiles, indent=2))
@@ -80,5 +83,5 @@ def handle_bad_request(e):
     
 def page_not_found(e):
   return render_template('404.html'), 404
-  
+
 app.run(debug=True)
